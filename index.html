@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Login Form with Sign and Exit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+  background-image: url('dou.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+            background-position:center;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1c92d2 0%, #f2fcfe 100%)
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Container */
+  .login-container {
+    background: (255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    padding: 40px 30px 50px;
+    width: 340px;
+    max-width: 90vw;
+    color: #333;
+  }
+
+  /* Title */
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 5rem;
+    user-select: none;
+    color: lime;
+    letter-spacing: 1.2px;
+    text-shadow: 2px 2px 2px blue;
+  }
+
+  /* Form */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 15px;
+    background: transparent;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: lime;
+    caret-color: white;
+    transition: border-color 0.3s ease;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: lime;
+  }
+
+  /* Label animation */
+  label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: lime;
+    pointer-events: none;
+    transition: 0.3s ease all;
+    background: white
+    user-select: none;
+    text-shadow: 2px 2px 2px blue;
+  }
+
+  /* When input focused or has text */
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 12px;
+    font-size: 0.75rem;
+    color: lime;
+    padding: 0 6px;
+    border-radius: 4px;
+  }
+
+  /* Button container */
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  /* Buttons */
+  button {
+    flex: 1;
+    padding: 14px 0;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(28,146,210,0.4);
+    user-select: none;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  button#signIn {
+    background: #1c92d2;
+    color: white;
+    text-shadow: 2px 2px 2px blue;
+  }
+  button#signIn:hover {
+    background: #1173b8;
+    box-shadow: 0 8px 25px rgba(17,115,184,0.7);
+  }
+
+  button#exit {
+    background: #ccc;
+    color: red;
+    text-shadow: 2px 2px 2px blue;
+  }
+  button#exit:hover {
+    background: #aaa;
+    box-shadow: 0 8px 15px rgba(170,170,170,0.7);
+  }
+
+  /* Animated background circles */
+  .animated-circles {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .animated-circles span {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(28,146,210,0.15);
+    animation: floatUp 12s linear infinite;
+    opacity: 0.6;
+  }
+
+  .animated-circles span:nth-child(1) {
+    width: 90px;
+    height: 90px;
+    left: 15%;
+    bottom: -110px;
+    animation-duration: 12s;
+    animation-delay: 0s;
+  }
+  .animated-circles span:nth-child(2) {
+    width: 140px;
+    height: 140px;
+    left: 50%;
+    bottom: -130px;
+    animation-duration: 15s;
+    animation-delay: 3s;
+  }
+  .animated-circles span:nth-child(3) {
+    width: 70px;
+    height: 70px;
+    left: 80%;
+    bottom: -90px;
+    animation-duration: 13s;
+    animation-delay: 6s;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-700px) scale(1.2);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive for mobile height max 600px and width 350px */
+  @media (max-width: 375px), (max-height: 600px) {
+    body {
+      height: 100vh;
+    }
+    .login-container {
+      width: 90vw;
+      padding: 30px 20px 40px;
+    }
+    .login-container h2 {
+      font-size: 1.6rem;
+    }
+    input {
+      font-size: 0.9rem;
+      padding: 12px 12px;
+    }
+    button {
+      font-size: 1rem;
+      padding: 12px 0;
+    }
+    .form-group {
+      margin-bottom: 22px;
+    }
+    .button-group {
+      gap: 10px;
+    }
+  }
+  /* Button Animation */
+.animated-button {
+  animation: button-pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes button-pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+div img {
+height: 100px;
+            border-radius: 70%;
+            border: 2px solid white
+position: fixed;
+    top: 10px;
+    right: 20px;
+  display: block;
+  margin: 0 auto 20px; /* Center the logo and add space below */
+  width: 50px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+</style>
+</head>
+<body>
+
+<div class="login-container animated-button" role="main" aria-labelledby="loginTitle">
+    <img src="school.jpeg" alt="logo">
+  <h2 id="loginTitle">Login</h2>
+  <form id="loginForm" novalidate>
+    <div class="form-group">
+      <input type="text" id="username" name="username" required autocomplete="username" placeholder=" " aria-required="true" />
+      <label for="username">Username</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="name" name="name" required autocomplete="name" placeholder=" " aria-required="true" />
+      <label for="name">Name</label>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" name="password" required autocomplete="current-password" placeholder=" " aria-required="true" />
+      <label for="password">Password</label>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" id="signIn" aria-label="Sign in">Sign In</button>
+      <button type="button" id="exit" aria-label="Exit login form">Exit</button>
+    </div>
+  </form>
+</div>
+
+<div class="animated-circles" aria-hidden="true">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const signInBtn = document.getElementById('signIn');
+  const exitBtn = document.getElementById('exit');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      alert('Please fill in all fields correctly.');
+      return;
+    }
+
+    const username = form.username.value.trim();
+    const name = form.name.value.trim();
+    const password = form.password.value;
+
+    signInBtn.disabled = true;
+    signInBtn.textContent = 'Signing In...';
+
+    // Simulated redirect to another application URL
+    setTimeout(() => {
+      alert(`Welcome, ${name}! You will be redirected now.And thank you for your log in`);
+      // Example redirect, replace the URL with actual external app URL as needed
+      window.location.href = 'http://localhost:8080/Navigation%20Bar.html';
+    }, 1400);
+  });
+
+  exitBtn.addEventListener('click', () => {
+    // Option 1: reset form and show alert
+    form.reset();
+    alert('You have exited the login form.');
+
+    // Optionally, you can uncomment below lines to redirect to a homepage or exit page
+    // window.location.href = 'https://example.com/exit-page';
+  });
+</script>
+
+</body>
+</html>
+
+
+
